@@ -1,0 +1,6 @@
+Scheduled? (Y/N),Date Scheduled,Donor ID,IDS Expiry,Blood Type,Date of Birth,Age,Sex,Ethnicity,Donation Types,BMI,Taking Daily Meds? (Y/N),Tobacco Use,CMV Status,EBV Status,Reliability Score
+N,-,CE0010840,09/15/2026,B+,11/29/1996,29,Male,Caucasian,"LP, WB, BM",24.01,Y,N,Positive,Positive,0.0
+N,-,CE0011328,08/09/2026,A+,06/12/2004,22,Male,Caucasian,"LP, WB, BM",23.05,N,N,Positive,Positive,100.0
+N,-,CE0011482,10/05/2026,O+,01/29/2003,23,Male,Caucasian,"LP, WB, BM, MLP",21.9,N,N,Positive,Positive,100.0
+Y,7/27/2026 @ 7:00am,CE0011610,08/04/2026,O+,02/10/1997,29,Male,Caucasian,"LP, WB",23.05,Y,N,Positive,Positive,100.0
+N,-,CE0011613,08/05/2026,O-,05/29/2001,25,Male,Caucasian,"LP, WB",21.22,Y,N,Positive,Positive,100.0

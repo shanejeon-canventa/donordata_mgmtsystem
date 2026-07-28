@@ -1,0 +1,27 @@
+{
+    "donors": "inputs/donors.csv",
+    "appointments_final": "inputs/appointments_final.csv",
+    "appointments_raw": "inputs/appointments_raw.csv",
+    "donations": "inputs/donations.csv",
+    "output_dir": "reports",
+    "excluded_donor_ids": ["CE0005559", "CE0005498", "CE0007756"],
+    "deep_screen_criteria": {
+        "min_age": 20,
+        "max_age": 30,
+        "min_bmi": 18.5,
+        "max_bmi": 24.9,
+        "exclude_female_caucasian": true 
+    },
+    "cell_line_ethnicity_map": {
+        "cl1": {"ethnicities": ["white", "caucasian"], "require_male": true},
+        "cl2": {"ethnicities": ["asian", "mixed"], "require_male": false},
+        "cl3": {"ethnicities": ["hispanic", "nativeamerican"], "require_male": false},
+        "cl4": {"ethnicities": ["africanamerican", "mixed"], "require_male": false}
+    },
+    "scoring_weights": {
+        "passed": 1.0,
+        "failed": 0.75,
+        "cancelled": 0.50,
+        "no_show": 0.0
+    }
+}

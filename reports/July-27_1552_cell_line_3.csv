@@ -1,0 +1,25 @@
+Scheduled? (Y/N),Date Scheduled,Donor ID,IDS Expiry,Blood Type,Date of Birth,Age,Sex,Ethnicity,Donation Types,BMI,Taking Daily Meds? (Y/N),Tobacco Use,CMV Status,EBV Status,Reliability Score
+N,-,CE0007898,08/12/2026,O+,07/06/2002,24,Female,Hispanic,"LP, WB",24.67,N,N,Positive,Positive,83.33
+N,-,CE0008846,08/18/2026,O+,06/10/2002,24,Female,Hispanic,LP,23.6,N,N,Negative,Positive,92.86
+N,-,CE0009002,06/16/2026,O+,01/28/1996,30,Female,Hispanic,"LP, WB",24.3,Y,N,Negative,Positive,83.33
+Y,8/5/2026 @ 6:30am,CE0009279,06/03/2026,O+,05/23/2001,25,Female,Hispanic,"LP, WB",23.7,N,N,Positive,Positive,100.0
+N,-,CE0010518,09/02/2026,O+,08/18/2003,22,Female,Hispanic,"LP, WB",22.96,N,N,Positive,Positive,95.45
+N,-,CE0010584,09/13/2026,A+,06/14/2000,26,Female,Hispanic,"LP, WB",24.7,N,N,Negative,Positive,96.88
+Y,7/27/2026 @ 8:00am,CE0010701,09/01/2026,A+,10/14/2000,25,Female,Hispanic,"LP, WB, BM",24.53,Y,N,Negative,Positive,0.0
+N,-,CE0010768,04/28/2026,A+,05/22/2003,23,Female,Hispanic,"LP, WB, BM",24.1,Y,N,Negative,Positive,92.86
+N,-,CE0010812,05/05/2026,A+,05/07/2004,22,Female,Hispanic,LP,23.6,Y,N,Negative,Positive,100.0
+Y,8/10/2026 @ 6:15am,CE0011016,10/12/2026,O+,02/10/2000,26,Female,Hispanic,"LP, WB, BM",23.8,N,N,Positive,Negative,80.0
+N,-,CE0011074,06/09/2026,O+,05/27/2003,23,Female,Hispanic,"LP, WB",22.8,N,N,Negative,Positive,90.0
+N,-,CE0011096,07/22/2026,A+,01/05/2002,24,Male,Hispanic,"LP, WB",22.19,N,N,Positive,Positive,88.89
+N,-,CE0011120,09/27/2026,A+,04/03/1999,27,Female,Hispanic,"LP, WB",24.4,N,N,Positive,Positive,94.44
+N,-,CE0011307,09/08/2026,O+,02/21/2000,26,Male,Hispanic,"LP, WB, BM",22.6,N,N,Negative,Positive,0.0
+N,-,CE0011330,09/20/2026,O+,10/13/2005,20,Male,Hispanic,"LP, WB, BM",22.32,N,N,Positive,Negative,100.0
+Y,8/10/2026 @ 7:30am,CE0011397,07/27/2026,O+,05/16/2004,22,Female,Hispanic,"LP, WB",22.88,N,N,Positive,Positive,95.0
+N,-,CE0011508,05/13/2026,A+,04/04/2001,25,Female,Hispanic,"LP, WB",22.2,N,N,Negative,Positive,100.0
+N,-,CE0011525,09/13/2026,O+,03/20/2003,23,Male,Hispanic,"LP, WB, BM",21.55,Y,N,Negative,Negative,0.0
+N,-,CE0011535,08/17/2026,A+,10/28/2004,21,Female,Hispanic,LP,24.06,N,N,Positive,Equivocal,83.33
+N,-,CE0011543,06/10/2026,A+,09/11/2005,20,Male,Hispanic,"LP, WB, BM",23.8,N,N,Positive,N/A,0.0
+N,-,CE0011552,06/17/2026,O+,01/30/2006,20,Male,Hispanic,"LP, WB",22.9,Y,N,Positive,N/A,0.0
+Y,7/29/2026 @ 10:30am,CE0011569,09/21/2026,O+,02/09/1997,29,Male,Hispanic,"LP, WB, BM",23.92,Y,N,Positive,Positive,83.33
+Y,8/5/2026 @ 6:15am,CE0011577,07/09/2026,O+,04/05/2004,22,Female,Hispanic,LP,24.46,N,N,Negative,Positive,100.0
+N,-,CE0011648,09/06/2026,B+,05/03/2005,21,Female,Hispanic,"LP, WB",22.56,Y,N,Negative,N/A,0.0

@@ -1,0 +1,9 @@
+Scheduled? (Y/N),Date Scheduled,Donor ID,IDS Expiry,Blood Type,Date of Birth,Age,Sex,Ethnicity,Donation Types,BMI,Taking Daily Meds? (Y/N),Tobacco Use,CMV Status,EBV Status,Reliability Score
+N,-,CE0008751,07/26/2026,B+,12/06/1995,30,Male,AfricanAmerican,"LP, WB",24.0,N,N,Negative,Positive,75.0
+N,-,CE0009120,10/04/2026,O+,09/21/2000,25,Female,AfricanAmerican,"LP, WB, BM",24.1,Y,N,Negative,Negative,100.0
+N,-,CE0010866,09/29/2026,O+,12/09/2002,23,Female,AfricanAmerican,"LP, WB",22.66,N,N,Positive,Positive,93.75
+N,-,CE0011113,09/20/2026,O+,10/23/2001,24,Male,AfricanAmerican,"LP, WB, BM",24.6,N,N,Positive,Positive,100.0
+N,-,CE0011415,10/11/2026,B+,10/15/2004,21,Female,AfricanAmerican,"LP, WB",24.01,N,N,Positive,Positive,75.0
+Y,7/28/2026 @ 8:00am,CE0011460,07/01/2026,O+,11/27/2005,20,Male,AfricanAmerican,"LP, WB",24.3,N,N,Positive,Positive,100.0
+N,-,CE0011538,08/26/2026,B+,06/10/1996,30,Female,AfricanAmerican,LP,24.72,N,N,Positive,Positive,100.0
+N,-,CE0011554,06/21/2026,A+,07/24/1998,28,Male,AfricanAmerican,"LP, WB, BM",22.4,N,N,Positive,N/A,0.0
