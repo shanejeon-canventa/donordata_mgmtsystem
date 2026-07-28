@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 def merge_appointment_files(primary_path: str, secondary_path: str, output_path: str) -> None:
-    """Combines secondary appointment export files into a single consolidated CSV."""
+    """Adds new appointments by cross-referencing old appointments in previous CSV appointment file to avoid needing to export multiple times from CRM (return to this)."""
     p_file = Path(primary_path)
     s_file = Path(secondary_path)
     o_file = Path(output_path)
@@ -40,10 +40,10 @@ def merge_appointment_files(primary_path: str, secondary_path: str, output_path:
     print(f"Successfully merged {len(merged_records)} unique records into: {output_path}")
 
 
-# if __name__ == "__main__":
-#     # Example execution fallback when running script directly from command line
-#     merge_appointment_files(
-#         primary_path="inputs/appointments_raw.csv",
-#         secondary_path="inputs/appointments_update.csv",
-#         output_path="inputs/appointments.csv"
-#     )
+if __name__ == "__main__":
+    # Example execution fallback when running script directly from command line
+    merge_appointment_files(
+        primary_path="inputs/appointments_raw.csv",
+        secondary_path="inputs/appointments_update.csv",
+        output_path="inputs/appointments.csv"
+    )
