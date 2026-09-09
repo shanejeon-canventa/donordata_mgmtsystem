@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 from typing import List, Optional, Tuple
 from src.models import Donor, Appointment
-from src.utils import _parse_csv_date, _parse_csv_bool, _parse_csv_float, _parse_csv_list
+from src.utils import _parse_csv_date, _parse_csv_bool, _parse_csv_float, _parse_csv_list, parse_date_string
 
 
 def extract_date_from_notes(notes: Optional[str], anchor_date: Optional[datetime]) -> Optional[datetime]: #which notes?
@@ -73,6 +73,8 @@ def load_complete_donor_data(reader_data, *args) -> List[Donor]:
                 has_allergies=_parse_csv_bool(row.get('Has Allergies?')),
                 hla_testing_complete=_parse_csv_bool(row.get('HLA Testing Complete')),
                 hla_a2_positive=_parse_csv_bool(row.get('HLA A2 Positive')),
+                # ebv_tested=_parse_csv_bool(row.get('EBV tested')),
+                # ebv_negative=_parse_csv_bool(row.get('EBV negative')),
                 last_ids_screen=_parse_csv_date(row.get('Last IDS Screen')),
                 last_ids_expiry=_parse_csv_date(row.get('Last IDS Expiry')),
                 hemoglobin=_parse_csv_float(row.get('Hemoglobin')),
@@ -90,13 +92,14 @@ def load_complete_donor_data(reader_data, *args) -> List[Donor]:
                 cmv_total_ab=_parse_csv_bool(row.get('CMV Total AB')) if row.get('CMV Total AB') else None,
                 cmv_igg=row.get('CMV IgG', ''),
                 ebv_igg=row.get('EBV IgG', ''),
+                ebv_testing_date=_parse_csv_date(row.get('EBV Testing Date')),
                 allergies=row.get('Allergies') or None,
                 last_bm_donation=_parse_csv_date(row.get('Last BM Donation')),
                 last_lp_donation=_parse_csv_date(row.get('Last LP Donation')),
                 econsent_date=_parse_csv_date(row.get('e-Consent Date')),
                 notes=row.get('Notes') or None,
                 ebv_ab_profile_testing_date=_parse_csv_date(row.get('EBV Ab Profile testing date')),
-                ebv_ab_profile=_parse_csv_bool(row.get('EBV Ab profile')) if row.get('EBV Ab profile') else None
+                ebv_ab_profile=_parse_csv_bool(row.get('EBV Ab profile')) if row.get('EBV Ab profile') else None,
             )
             donors.append(donor_obj)
         except ValueError as err:
@@ -150,3 +153,80 @@ def load_pipeline_dataset(config: dict) -> Tuple[List[Donor], List[Appointment]]
     appointments = load_csv_dict_reader(config['appointments_final'], load_appointment_records, excluded)
     
     return donors, appointments
+
+def load_donors(config: dict) -> List[Donor]: 
+    """Loads CRM donor data"""
+    print(f"\nLOADING (ONLY) DONOR DATA")
+    print('*'*20)
+    donors = load_csv_dict_reader(config['donors'], load_complete_donor_data)
+    return donors
+
+# MERGING DONATIONS WITH APPOINTMENTS ---> PRODUCE APPOINTMENTS_FINAL.CSV
+
+def parse_donation_data(config: dict) -> List[dict]:
+    donations = []
+    statuses = {}
+    for row_number, row in enumerate(config, start=1):
+        donor_id = row.get('Donor ID', '').strip()
+        donation_id = row.get('Description', '').strip()
+        donation_type = row.get('Type', '').strip()
+        donation_status = row.get('Status', '').strip().lower()
+        
+        if donor_id == '':
+            print(f"XXX Row: {row_number} has no donor ID found XXX")
+            continue
+        if donation_id == '':
+            print(f"XXX Row: {row_number} has no donation ID found XXX")
+            continue
+        if donation_status not in statuses:
+            statuses[donation_status] = 0
+        elif donation_status in statuses:
+            statuses[donation_status] += 1
+            
+        donation_dict = {'donor_id': donor_id, 'donation_id': donation_id, 'donation_type': donation_type, 'donation_status': donation_status}
+        donations.append(donation_dict)
+        
+    return donations 
+
+def parse_appointment_data(config: dict) -> List[dict]:
+    appointments = []
+    skipped = {'donor_id': 0, 'donation_id': 0, 'appointment_date': 0}
+    
+    for row_number, row in enumerate(reader_data, start=1):
+        donor_id = row.get('Donor ID', '').strip()
+        donation_id = row.get('About', '').strip()
+        donation_type = row.get('Donation Type', '').strip()
+        appointment_date_string = row.get('Date / Time', '').strip()
+        appointment_subject = row.get('Subject', '').strip().lower()
+        
+        if donor_id == '':
+            skipped['donor_id'] += 1
+            continue
+        if donation_id == '':
+            skipped['donation_id'] += 1
+            continue
+        if appointment_date_string == '':
+            skipped['appointment_date'] += 1
+            continue
+    
+        appointment_date, appointment_time = parse_date_string(appointment_date_string)
+        appointment_dict = {
+            'donor_id': donor_id,
+            'donation_id': donation_id,
+            'donation_type': donation_type,
+            'appointment_date': appointment_date,
+            'appointment_time': appointment_time,
+            'appointment_status': appointment_status,
+            'appointment_subject': appointment_subject
+        }
+        appointments.append(appointment_dict)
+    
+    print(f"Rows skipped: {skipped}")
+    return appointments
+
+def load_appointment_merger(config: dict) -> Tuple[List[Donor], List[Appointment]]:
+    """Standardized entry point for loading donation and appointment datasets."""
+    donations = load_csv_dict_reader(config['donations'], parse_donation_data)
+    appointments = load_csv_dict_reader(config['appointments_raw'], parse_appointment_data)
+    
+    return donations, appointments

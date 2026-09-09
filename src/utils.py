@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 from typing import Optional, List
 
 
@@ -6,6 +6,11 @@ def parse_date_string(date_string: str) -> list:
     """Splits a full timestamp string into separate date and time objects."""
     full_datetime = datetime.strptime(date_string, "%m/%d/%Y %I:%M %p")
     return [full_datetime.date(), full_datetime.time()]
+
+def is_future_date(date: date):
+    today = datetime.today().date()
+    
+    return date > today
 
 
 def _parse_csv_date(date_str: Optional[str]) -> Optional[datetime]:

@@ -1,7 +1,7 @@
 from enum import Enum
 from dataclasses import dataclass, field
 from typing import Optional, List
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class RecallStatus(Enum):
@@ -47,6 +47,9 @@ class Donor:
     has_allergies: bool
     hla_testing_complete: bool
     hla_a2_positive: bool
+    
+    # ebv_tested: bool
+    # ebv_negative: bool
 
     last_ids_screen: Optional[datetime]
     last_ids_expiry: Optional[datetime]
@@ -70,12 +73,14 @@ class Donor:
     recallability_status: RecallStatus = RecallStatus.UNEVALUATED
     deep_screen: bool = False
     reliability_score: Optional[float] = None
+    ebv_neg_recall: bool = False
 
     # Optional Clinical Markers
     bm_type: Optional[str] = None
     cmv_total_ab: Optional[bool] = None
     cmv_igg: Optional[str] = None
     ebv_igg: Optional[str] = None
+    ebv_testing_date: Optional[datetime] = None
     allergies: Optional[str] = None
     last_bm_donation: Optional[datetime] = None
     last_lp_donation: Optional[datetime] = None
@@ -83,6 +88,7 @@ class Donor:
     notes: Optional[str] = None
     ebv_ab_profile_testing_date: Optional[datetime] = None
     ebv_ab_profile: Optional[bool] = None
+    ebv_testing_date: Optional[datetime] = None
 
     def _qualifies_for_lp(self) -> bool:
         """Quick check to verify if donor is cleared for Leukapheresis."""
@@ -127,3 +133,20 @@ class Donor:
                     return
                     
             self.deep_screen = True
+            
+    def evaluate_ebv_negative_donors(self) -> None:
+        is_recallable = self.recallability_status in (
+            RecallStatus.RECALLABLE,
+            RecallStatus.RECALLABLE_NEED_RESCREEN
+        )
+        
+        if self.ebv_testing_date != None:
+            today = datetime.now()
+            ninety_days_ago = today - timedelta(days=90)
+            print(f'EBV TESTING: {self.ebv_testing_date}')
+            valid_labs = self.ebv_testing_date > ninety_days_ago
+            
+            if is_recallable and self._qualifies_for_lp() and self.ebv_igg.strip().lower().startswith('neg') and valid_labs == True:
+                self.ebv_neg_recall = True
+                print(f'donor ID: {self.donor_id}')
+                

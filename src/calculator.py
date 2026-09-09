@@ -9,7 +9,7 @@ def calculate_reliability_score(donor_key: str, appt_history: dict, weights: dic
     no_show = len(appt_dict.get('no_show', []))
 
     total = passed + failed + cancelled + no_show
-    if total == 0:
+    if total <= 3:
         return 0.0
 
     points = (
@@ -19,4 +19,6 @@ def calculate_reliability_score(donor_key: str, appt_history: dict, weights: dic
         (no_show * weights.get('no_show', 0.0))
     )
 
+    print(round(points/total) * 100, 2)
     return round((points / total) * 100, 2)
+

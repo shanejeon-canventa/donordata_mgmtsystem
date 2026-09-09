@@ -34,7 +34,9 @@ def run_cell_line_report_pipeline() -> None:
     weights = config.get('scoring_weights', {})
     for donor in donors:
         categorize_donor_appointments(donor, today)
+        print(donor.sorted_appointments)
         donor.reliability_score = calculate_reliability_score(donor.donor_id, donor.sorted_appointments, weights)
+        # print(donor.reliability_score)
 
     # Evaluate recall & screening qualification
     process_donor_recall(donors)
@@ -48,7 +50,8 @@ def run_cell_line_report_pipeline() -> None:
     # Generate output CSVs
     cohorts = sort_donors_by_cell_lines(donors, config['cell_line_ethnicity_map'])
     
-    out_dir = Path(config.get('output_dir', 'reports'))
+    base_dir = Path(config.get('output_dir', 'reports'))
+    out_dir = base_dir / "iPSC"
     out_dir.mkdir(parents=True, exist_ok=True)
     
     timestamp = datetime.now().strftime('%B-%d_%H%M')
